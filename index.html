@@ -107,14 +107,14 @@
     <div id="stage0" class="page" style="display: flex;">
         <h1 style="font-family: 'Dancing Script'; font-size: 3.5rem; margin-bottom: 20px;">Sinthia-Butterfly Magic 🦋</h1>
         <div class="glass-card">
-            <p style="font-size: 1.3rem; margin-bottom: 30px;">২০২৬ সালের জাদুকরী মুহূর্ত আসতে বাকি:</p>
+            <p style="font-size: 1.3rem; margin-bottom: 30px;">Special Waiting 🫀:</p>
             <div class="timer-container" style="margin: 0 auto;">
                 <div class="orb-ring"></div>
                 <div class="orb-inner"></div>
                 <div id="main-clock" class="countdown-digits">00d 00h 00m 00s</div>
             </div>
             <button id="sync-btn" style="margin-top: 30px; padding: 15px 40px; border-radius: 50px; background: var(--primary); border: none; color: #fff; font-family: 'Pacifico'; cursor: pointer; box-shadow: 0 0 30px var(--primary);" onclick="startSync()">Sync Magic & Sound ✨</button>
-            <p style="opacity: 0.6; margin-top: 15px;">(১লা জানুয়ারি ২০২৬ রাত ১২টায় অটোমেটিক শুরু হবে)</p>
+            <p style="opacity: 0.6; margin-top: 15px;">(More Love Coming)</p>
         </div>
     </div>
 
@@ -162,7 +162,7 @@
     <!-- STAGE 5: HEART TALK (AUTO SCROLL) -->
     <div id="stage5" class="page">
         <div class="glass-card" id="talk-card">
-            <h2 style="font-family: 'Pacifico'; color: var(--gold); margin-bottom: 20px;">হৃদয়ের জমানো কথা... ❤️</h2>
+            <h2 style="font-family: 'Pacifico'; color: var(--gold); margin-bottom: 20px;">হৃদয়ের কিছু কথা... 🫀❤️</h2>
             <div id="talk-box" style="width: 100%;"></div>
         </div>
     </div>
@@ -176,7 +176,7 @@
         <h1 class="glow-title" style="font-family: 'Pacifico'; font-size: 5rem; margin-top: 50px;">Sinthia-Butterfly</h1>
         <div class="glass-card" style="margin-top: 40px;">
             <h2 class="glow-title" style="font-family: 'Dancing Script'; font-size: 3.5rem;">1 January Memories ✨</h2>
-            <p style="font-size: 1.5rem; line-height: 1.6; margin-top: 15px;">তুমি প্রজাপতির মতো রঙিন এবং হীরের মতো উজ্জ্বল। এই দিনটি তোমার সারা জীবন হাসিখুশি দিয়ে ভরে থাকুক! 🦋💖🎂🌈</p>
+            <p style="font-size: 1.5rem; line-height: 1.6; margin-top: 15px;">তুমি প্রজাপতির মতো রঙিন এবং চাদের মতো উজ্জ্বল 💫। এই দিনটি তোমার সারা জীবন হাসিখুশি দিয়ে ভরে থাকুক! 🦋💖🎂🌈</p>
             <p style="margin-top: 20px; font-weight: bold; color: var(--primary);">Happy Birthday My Angel!</p>
         </div>
     </div>
@@ -302,7 +302,7 @@
 
         function startTyping() {
             new Typed('#typed-msg', {
-                strings: ['শুভ জন্মদিন সিনথিয়া... 🦋', 'তুমি প্রজাপতির মতো রঙিন এবং হীরের মতো উজ্জ্বল। ✨', 'তুমি আছো বলেই ১লা জানুয়ারি এত স্পেশাল! ❤️', 'সবসময় এভাবেই হাসিখুশি থেকো! 💖🎂'],
+                strings: ['শুভ জন্মদিন সিনথিয়া... 🦋', 'তুমি প্রজাপতির মতো রঙিন এবং চাদের মতো উজ্জ্বল। ✨', 'তুমি আছো বলেই ১লা জানুয়ারি এত স্পেশাল! ❤️', 'সবসময় এভাবেই হাসিখুশি থেকো! 💖🎂'],
                 typeSpeed: 50,
                 onComplete: () => { setTimeout(() => { showPage('stage5'); startHeartTalk(); }, 2000); }
             });
@@ -313,12 +313,12 @@
             const box = document.getElementById('talk-box');
             const card = document.getElementById('talk-card');
             const lines = [
-                "সিনথিয়া, তুমি জানো কি? তুমি আমার জীবনের সেরা মিরাকল! 🎁",
+                "সিনথিয়া, তুমি জানো কি? তুমি আমার জীবনের প্রতিটি সেরা মুহুর্ত! 🫀😙",
                 "তোমার প্রতিটি হাসি আমার দিনের সেরা মুহূর্ত। 🦋✨",
                 "আজকের দিনটি শুধু তোমার খুশির জন্য সাজানো হয়েছে। 🎂",
                 "সবসময় এভাবেই আমার পাশে থেকো প্রজাপতি! ❤️🦋",
                 "তোমাকে ছাড়া আমার প্রতিটি দিন একদম পানসে। 🙁",
-                "১লা জানুয়ারির এই স্মৃতিগুলো যেন সারাজীবন মনে থাকে। ✨"
+                "১ জানুয়ারির এই স্মৃতিগুলো যেন সারাজীবন মনে থাকে। ✨"
             ];
             let i = 0;
             function addLine() {
