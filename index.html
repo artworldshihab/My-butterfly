@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sinthia-Butterfly | Cosmic 2026 🦋✨</title>
+    
+    <!-- Fonts & Industry Libraries -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;700&family=Pacifico&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+
+    <style>
+        :root {
+            --primary: #ff3366;
+            --gold: #ffd700;
+            --neon: #00f3ff;
+            --glass: rgba(255, 255, 255, 0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+        body { background: #000; color: white; font-family: 'Hind Siliguri', sans-serif; overflow: hidden; height: 100vh; width: 100vw; }
+
+        /* Full 100-Color Animated Backdrop */
+        #bg-canvas { position: fixed; inset: 0; z-index: -2; background: #020205; }
+        .lighting-aura {
+            position: fixed; inset: 0; z-index: -1;
+            background: conic-gradient(from 0deg, red, yellow, lime, aqua, blue, magenta, red);
+            filter: blur(150px); opacity: 0.1;
+            animation: rotateAura 15s linear infinite;
+        }
+        @keyframes rotateAura { to { transform: rotate(360deg); } }
+
+        /* Custom Magic Cursor */
+        #cursor { position: fixed; width: 15px; height: 15px; background: #fff; border-radius: 50%; pointer-events: none; z-index: 10000; box-shadow: 0 0 20px #fff, 0 0 40px var(--primary); }
+
+        .page { position: absolute; inset: 0; display: none; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; }
+
+        /* Liquid Glass Container */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(40px) saturate(150%);
+            -webkit-backdrop-filter: blur(40px) saturate(150%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 40px; padding: 30px;
+            width: 90%; max-width: 550px;
+            max-height: 85vh; overflow-y: auto;
+            box-shadow: 0 30px 100px rgba(0,0,0,0.9);
+            position: relative;
+        }
+        .glass-card::-webkit-scrollbar { width: 0; } /* Hide Scrollbar but keep functionality */
+
+        /* Cosmic Orb Timer */
+        .timer-container { position: relative; width: 300px; height: 300px; display: flex; justify-content: center; align-items: center; }
+        .orb-ring { position: absolute; width: 100%; height: 100%; border: 3px solid transparent; border-top: 3px solid var(--neon); border-bottom: 3px solid var(--primary); border-radius: 50%; animation: spin 4s linear infinite; }
+        .orb-inner { position: absolute; width: 80%; height: 80%; border: 2px dashed var(--gold); border-radius: 50%; animation: spinRev 6s linear infinite; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        @keyframes spinRev { 100% { transform: rotate(-360deg); } }
+        .countdown-digits { font-size: 2.2rem; font-family: 'Pacifico'; color: #fff; text-shadow: 0 0 30px var(--neon); line-height: 1.2; }
+
+        /* Text Effects */
+        .glow-title {
+            background: linear-gradient(90deg, #fff, var(--primary), var(--gold), #fff);
+            background-size: 200%; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            animation: shine 3s linear infinite; font-weight: bold;
+        }
+        @keyframes shine { to { background-position: 200%; } }
+
+        /* 3D Realistic Cake */
+        .cake-3d { position: relative; width: 200px; height: 160px; transform: scale(1.3); margin: 60px 0; }
+        .layer { width: 100%; height: 50px; background: #f9d9d9; border-radius: 15px; position: absolute; bottom: 0; box-shadow: 0 8px 0 #e8baba; }
+        .mid { width: 85%; left: 7.5%; bottom: 45px; background: #fff1f1; }
+        .top { width: 70%; left: 15%; bottom: 85px; background: #f9d9d9; }
+        .candle { position: absolute; top: -50px; left: 50%; transform: translateX(-50%); width: 12px; height: 50px; background: white; border-radius: 5px; }
+        .flame { position: absolute; top: -30px; left: 50%; transform: translateX(-50%); width: 18px; height: 30px; background: orange; border-radius: 50%; animation: flicker 0.1s infinite alternate; box-shadow: 0 0 30px orange; }
+        @keyframes flicker { from { opacity: 0.8; transform: translateX(-50%) scale(0.9); } to { transform: translateX(-50%) scale(1.1); } }
+
+        /* Gifts */
+        .gift-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; width: 100%; margin-top: 30px; }
+        .gift-box { background: rgba(255,255,255,0.06); border: 1.5px solid rgba(255,255,255,0.2); border-radius: 20px; aspect-ratio: 1/1; display: flex; justify-content: center; align-items: center; font-size: 3.5rem; cursor: pointer; transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .gift-box:hover { transform: scale(1.2) rotate(10deg); border-color: var(--primary); }
+        .gift-box.opened { pointer-events: none; background: rgba(255, 51, 102, 0.3); transform: scale(0.9); }
+
+        /* Final Butterfly */
+        .butterfly-final { width: 150px; height: 150px; position: relative; perspective: 1000px; transform: rotate(-10deg); }
+        .wing { position: absolute; width: 75px; height: 120px; background: linear-gradient(45deg, var(--primary), var(--neon)); border-radius: 50% 50% 0 50%; transform-origin: right center; animation: flapL 0.2s infinite alternate ease-in-out; filter: drop-shadow(0 0 20px var(--primary)); }
+        .wing.right { left: 75px; border-radius: 50% 50% 50% 0; transform-origin: left center; animation: flapR 0.2s infinite alternate ease-in-out; }
+        @keyframes flapL { from { transform: rotateY(0deg); } to { transform: rotateY(75deg); } }
+        @keyframes flapR { from { transform: rotateY(0deg); } to { transform: rotateY(-75deg); } }
+
+        .talk-bubble { background: rgba(255,255,255,0.05); padding: 18px; border-radius: 25px; margin: 12px 0; border-left: 5px solid var(--primary); text-align: left; font-size: 1.2rem; width: 100%; animation: slideIn 0.8s ease forwards; }
+        @keyframes slideIn { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: translateX(0); } }
+
+        #tree-canvas { position: absolute; bottom: 0; pointer-events: none; z-index: 1; }
+        #yt-player { position: absolute; top: -1000px; }
+    </style>
+</head>
+<body>
+
+    <div id="cursor"></div>
+    <div class="lighting-aura"></div>
+    <canvas id="bg-canvas"></canvas>
+    <div id="yt-player"></div>
+
+    <!-- START PAGE (TIMER) -->
+    <div id="stage0" class="page" style="display: flex;">
+        <h1 style="font-family: 'Dancing Script'; font-size: 3.5rem; margin-bottom: 20px;">Sinthia-Butterfly Magic 🦋</h1>
+        <div class="glass-card">
+            <p style="font-size: 1.3rem; margin-bottom: 30px;">২০২৬ সালের জাদুকরী মুহূর্ত আসতে বাকি:</p>
+            <div class="timer-container" style="margin: 0 auto;">
+                <div class="orb-ring"></div>
+                <div class="orb-inner"></div>
+                <div id="main-clock" class="countdown-digits">00d 00h 00m 00s</div>
+            </div>
+            <button id="sync-btn" style="margin-top: 30px; padding: 15px 40px; border-radius: 50px; background: var(--primary); border: none; color: #fff; font-family: 'Pacifico'; cursor: pointer; box-shadow: 0 0 30px var(--primary);" onclick="startSync()">Sync Magic & Sound ✨</button>
+            <p style="opacity: 0.6; margin-top: 15px;">(১লা জানুয়ারি ২০২৬ রাত ১২টায় অটোমেটিক শুরু হবে)</p>
+        </div>
+    </div>
+
+    <!-- STAGE 1: 5s COUNTDOWN & TREE -->
+    <div id="stage1" class="page">
+        <h1 id="timer-5" style="font-size: 10rem; font-family: 'Pacifico'; color: var(--gold); z-index: 10;">5</h1>
+        <canvas id="tree-canvas"></canvas>
+    </div>
+
+    <!-- STAGE 2: LUXURY CAKE -->
+    <div id="stage2" class="page">
+        <div class="glass-card">
+            <h1 class="glow-title" style="font-family: 'Pacifico'; font-size: 2.5rem; margin-bottom: 50px;">Special Cake For You! 🎂</h1>
+            <div class="cake-3d">
+                <div class="layer top"><div class="candle"><div class="flame"></div></div></div>
+                <div class="layer mid"></div>
+                <div class="layer"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- STAGE 3: GIFTS -->
+    <div id="stage3" class="page">
+        <div class="glass-card">
+            <h1 style="font-family: 'Dancing Script'; font-size: 3rem; margin-bottom: 20px;">Your Best Gift 🎁</h1>
+            <div class="gift-grid">
+                <div class="gift-box" onclick="revealGift(this, '💍')">🎁</div>
+                <div class="gift-box" onclick="revealGift(this, '🍫')">🎁</div>
+                <div class="gift-box" onclick="revealGift(this, '🌹')">🎁</div>
+                <div class="gift-box" onclick="revealGift(this, '🧸')">🎁</div>
+                <div class="gift-box" onclick="revealGift(this, '👑')">🎁</div>
+                <div class="gift-box" onclick="revealGift(this, '💎')">🎁</div>
+            </div>
+            <p id="gift-count" style="margin-top: 20px; color: var(--gold); font-weight: bold;">বাকি উপহার: 6</p>
+        </div>
+    </div>
+
+    <!-- STAGE 4: EMOTIONAL MESSAGE -->
+    <div id="stage4" class="page">
+        <div class="glass-card">
+            <div id="typed-msg" class="glow-title" style="font-size: 1.8rem; line-height: 1.8;"></div>
+        </div>
+    </div>
+
+    <!-- STAGE 5: HEART TALK (AUTO SCROLL) -->
+    <div id="stage5" class="page">
+        <div class="glass-card" id="talk-card">
+            <h2 style="font-family: 'Pacifico'; color: var(--gold); margin-bottom: 20px;">হৃদয়ের জমানো কথা... ❤️</h2>
+            <div id="talk-box" style="width: 100%;"></div>
+        </div>
+    </div>
+
+    <!-- STAGE 6: FINAL PAGE -->
+    <div id="stage6" class="page">
+        <div class="butterfly-final">
+            <div class="wing"></div>
+            <div class="wing right"></div>
+        </div>
+        <h1 class="glow-title" style="font-family: 'Pacifico'; font-size: 5rem; margin-top: 50px;">Sinthia-Butterfly</h1>
+        <div class="glass-card" style="margin-top: 40px;">
+            <h2 class="glow-title" style="font-family: 'Dancing Script'; font-size: 3.5rem;">1 January Memories ✨</h2>
+            <p style="font-size: 1.5rem; line-height: 1.6; margin-top: 15px;">তুমি প্রজাপতির মতো রঙিন এবং হীরের মতো উজ্জ্বল। এই দিনটি তোমার সারা জীবন হাসিখুশি দিয়ে ভরে থাকুক! 🦋💖🎂🌈</p>
+            <p style="margin-top: 20px; font-weight: bold; color: var(--primary);">Happy Birthday My Angel!</p>
+        </div>
+    </div>
+
+    <script>
+        let player;
+        let giftsRevealed = 0;
+        let isSynced = false;
+        
+        // টার্গেট: ১লা জানুয়ারি ২০২৬ রাত ১২টা
+        const targetDate = new Date("January 1, 2026 00:00:00").getTime();
+
+        // 1. YouTube API Support
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('yt-player', {
+                height: '0', width: '0', videoId: 'nAw2ooeubSQ',
+                playerVars: { 'autoplay': 0, 'loop': 1, 'playlist': 'nAw2ooeubSQ' }
+            });
+        }
+
+        function startSync() {
+            isSynced = true;
+            document.getElementById('sync-btn').innerHTML = "Synced! Waiting for 2026... ⌛";
+            document.getElementById('sync-btn').style.background = "#222";
+            if(player) player.playVideo(); // প্লে করে মিউট করে রাখলাম যাতে অটো-প্লে ব্লক না হয়
+            player.mute();
+        }
+
+        // 2. Continuous Countdown Logic
+        const mainClock = setInterval(() => {
+            const now = new Date().getTime();
+            const diff = targetDate - now;
+
+            if (diff <= 5000 && diff > 0) {
+                clearInterval(mainClock);
+                startFinalCountdown();
+            } else if (diff <= 0) {
+                // If it's already past 1st Jan 2026 but before Feb 2026
+                clearInterval(mainClock);
+                startFinalCountdown();
+            } else {
+                const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const s = Math.floor((diff % (1000 * 60)) / 1000);
+                document.getElementById('main-clock').innerText = `${d}d ${h}h ${m}m ${s}s`;
+            }
+        }, 1000);
+
+        function startFinalCountdown() {
+            if(isSynced) player.unMute();
+            showPage('stage1');
+            initTreeAnimation();
+        }
+
+        function showPage(id) {
+            gsap.to(".page", { opacity: 0, scale: 1.1, duration: 0.6, onComplete: () => {
+                document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+                let next = document.getElementById(id);
+                next.style.display = 'flex';
+                gsap.fromTo(next, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 1 });
+            }});
+        }
+
+        // 3. Math Heart Tree
+        function initTreeAnimation() {
+            let t = 5;
+            const timerEl = document.getElementById('timer-5');
+            const canvas = document.getElementById('tree-canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+
+            function draw(startX, startY, len, angle, branchWidth) {
+                ctx.beginPath(); ctx.save();
+                ctx.strokeStyle = len < 15 ? "transparent" : "#fff";
+                ctx.lineWidth = branchWidth; ctx.translate(startX, startY); ctx.rotate(angle * Math.PI / 180);
+                ctx.moveTo(0,0); ctx.lineTo(0, -len); ctx.stroke();
+                if(len < 12) {
+                    ctx.fillStyle = "red"; ctx.font = "20px Arial"; ctx.fillText("❤", 0, -len);
+                    ctx.restore(); return;
+                }
+                draw(0, -len, len*0.8, angle-15, branchWidth*0.7);
+                draw(0, -len, len*0.8, angle+15, branchWidth*0.7);
+                ctx.restore();
+            }
+            draw(canvas.width/2, canvas.height, 100, 0, 10);
+
+            const cd5 = setInterval(() => {
+                t--; timerEl.innerText = t;
+                gsap.from(timerEl, { scale: 3, opacity: 0, duration: 0.5 });
+                if(t === 0) {
+                    clearInterval(cd5);
+                    confetti({ particleCount: 200, spread: 70 });
+                    showPage('stage2');
+                    setTimeout(() => {
+                        gsap.to(".cake-3d", { scale: 0, rotation: 360, opacity: 0, duration: 1.5, onComplete: () => showPage('stage3') });
+                    }, 5000);
+                }
+            }, 1000);
+        }
+
+        // 4. Cursor Follower
+        const cursor = document.getElementById('cursor');
+        window.addEventListener('mousemove', (e) => {
+            gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.1 });
+        });
+
+        // 5. Reveal Gifts
+        function revealGift(el, item) {
+            if(el.classList.contains('opened')) return;
+            el.classList.add('opened');
+            el.innerText = item;
+            confetti({ particleCount: 50, spread: 60 });
+            giftsRevealed++;
+            document.getElementById('gift-count').innerText = 6 - giftsRevealed;
+            if(giftsRevealed === 6) setTimeout(() => { showPage('stage4'); startTyping(); }, 1200);
+        }
+
+        function startTyping() {
+            new Typed('#typed-msg', {
+                strings: ['শুভ জন্মদিন সিনথিয়া... 🦋', 'তুমি প্রজাপতির মতো রঙিন এবং হীরের মতো উজ্জ্বল। ✨', 'তুমি আছো বলেই ১লা জানুয়ারি এত স্পেশাল! ❤️', 'সবসময় এভাবেই হাসিখুশি থেকো! 💖🎂'],
+                typeSpeed: 50,
+                onComplete: () => { setTimeout(() => { showPage('stage5'); startHeartTalk(); }, 2000); }
+            });
+        }
+
+        // 6. Heart Talk with Auto-Scroll
+        function startHeartTalk() {
+            const box = document.getElementById('talk-box');
+            const card = document.getElementById('talk-card');
+            const lines = [
+                "সিনথিয়া, তুমি জানো কি? তুমি আমার জীবনের সেরা মিরাকল! 🎁",
+                "তোমার প্রতিটি হাসি আমার দিনের সেরা মুহূর্ত। 🦋✨",
+                "আজকের দিনটি শুধু তোমার খুশির জন্য সাজানো হয়েছে। 🎂",
+                "সবসময় এভাবেই আমার পাশে থেকো প্রজাপতি! ❤️🦋",
+                "তোমাকে ছাড়া আমার প্রতিটি দিন একদম পানসে। 🙁",
+                "১লা জানুয়ারির এই স্মৃতিগুলো যেন সারাজীবন মনে থাকে। ✨"
+            ];
+            let i = 0;
+            function addLine() {
+                if(i < lines.length) {
+                    let div = document.createElement('div');
+                    div.className = 'talk-bubble';
+                    div.innerHTML = lines[i];
+                    box.appendChild(div);
+                    card.scrollTo({ top: card.scrollHeight, behavior: 'smooth' });
+                    i++; setTimeout(addLine, 2800);
+                } else {
+                    setTimeout(() => showPage('stage6'), 3500);
+                }
+            }
+            addLine();
+        }
+
+        // 7. Background Star particles
+        const bgC = document.getElementById('bg-canvas');
+        const bgCtx = bgC.getContext('2d');
+        bgC.width = window.innerWidth; bgC.height = window.innerHeight;
+        let stars = [];
+        for(let i=0; i<150; i++) stars.push({ x: Math.random()*bgC.width, y: Math.random()*bgC.height, size: Math.random()*2, s: Math.random()*0.5 });
+        function aniStars() {
+            bgCtx.clearRect(0,0,bgC.width, bgC.height);
+            bgCtx.fillStyle = "rgba(255,255,255,0.7)";
+            stars.forEach(st => {
+                bgCtx.beginPath(); bgCtx.arc(st.x, st.y, st.size, 0, Math.PI*2); bgCtx.fill();
+                st.y += st.s; if(st.y > bgC.height) st.y = 0;
+            });
+            requestAnimationFrame(aniStars);
+        }
+        aniStars();
+    </script>
+</body>
+</html>
